@@ -1,11 +1,11 @@
+const TodoDB = require("../models/todos");
+
 const todosControllers ={
 
-    getAllTodos: (req, res) => {
-        res.json(
-            { 
-                message: "All todos fetched successfully" 
-            }
-        );
+    getAllTodos: async (req, res) => {
+
+        const todos = await TodoDB.find()
+        res.json(todos);
     }   
     
 }
