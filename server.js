@@ -1,7 +1,10 @@
 const { default: mongoose } = require("mongoose");
 const app = require("./app");
+const { MANGOOSE_DB_URI, PORT, HOST } = require("./utils/config");
 
-mongoose.connect("mongodb+srv://vekatesw:root@cluster0.db6kyd0.mongodb.net/")
+
+
+mongoose.connect(MANGOOSE_DB_URI)
 .then(() => {
   console.log("Connected to MongoDB");
 })
@@ -12,10 +15,7 @@ mongoose.connect("mongodb+srv://vekatesw:root@cluster0.db6kyd0.mongodb.net/")
 
 
 
-
-
-
-app.listen(3001,'localhost', () => {
+app.listen(PORT,HOST, () => {
   console.log("Server is running on port 3001");
 });
 
