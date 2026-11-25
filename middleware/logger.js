@@ -4,10 +4,7 @@ const fs = require("fs");
 
 const logger = (request,response,next) => {
 
-    console.log(request.ip);
-    console.log(request.headers);
-    console.log(request.method);
-    console.log(request.cookies);
+  
     const date= new Date();
     
 

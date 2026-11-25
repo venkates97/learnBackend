@@ -1,36 +1,32 @@
 const { response } = require("../app")
-const UserDB = require("../models/user")
+const UserDB = require("../models/user");
+const checkExistingUser = require("../validation/checkExistingUser");
 const authController = {
 
     registerUser: async (request, response) => {
 
         try {
-            const {name,email,password} = request.body;
-            // console.log(name,email,password);
+            const { name, email, password } = request.body;
 
+            // save it in user db model
             const newUser = new UserDB({
                 name,
                 email,
                 password
             })
 
-
-            // check wheather this user is already existed or not 
-
-            const existingUser = await UserDB.find({email}) 
-            
-            // console.log(existingUser.length > 0);
-            if (existingUser.length > 0)
-            {
-                return response.status(500).json({"message": "User already exist"})
+            // Validate user existance
+            if (await checkExistingUser(email)) {
+                return response.status(500).json({ "message": "User already exist" })
             }
-            
 
+            // if new user save it in database
             const savedUser = await newUser.save()
 
-            response.status(201).json({ 
+            // send resonse with saved message
+            response.status(201).json({
                 "message": "New user registered"
-                ,"New user Details" : savedUser
+                , "New user Details": savedUser
             });
 
         } catch (e) {
