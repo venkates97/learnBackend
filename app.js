@@ -2,6 +2,8 @@ const express = require("express");
 const todoRouter = require("./routes/todoRoutes");
 const bodyParser = require("body-parser");
 const logger = require("./middleware/logger");
+const errorHandeler = require("./middleware/errorHandeler");
+const authRoute = require("./routes/authRoutes");
 
 
 const app = express();
@@ -12,7 +14,14 @@ app.use(logger);
 
 // app.use(express.json())
 
-app.use("/todos", todoRouter );
+// adding router
+app.use("/todos", todoRouter);
+
+app.use("/auth", authRoute)
+
+//handling router notfound error
+
+app.use(errorHandeler);
 
 
 

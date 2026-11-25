@@ -25,7 +25,7 @@ const todosControllers = {
 
 
         } catch (e) {
-            response.status(500).jsnnnon({ "message": "Error in fecthig the id elements from mongo db" })
+            response.status(500).json({ "message": "Error in fecthig the id elements from mongo db" })
         }
 
     },
