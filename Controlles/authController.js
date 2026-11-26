@@ -30,7 +30,7 @@ const authController = {
             })
 
             // if new user save it in database
-            const savedUser = await newUser.save()
+            const savedUser = await newUser.save();
 
             // Never show password in front end
             const user = savedUser.toObject();
@@ -99,25 +99,14 @@ const authController = {
         try {
 
             // get token for authendication
-            const token = (request.cookies.token);
-            if (!token) {
-                return response.status(401).json({ "message": "user not authentidated" })
-            }
-
-            // Verify Token
-            const decodeToken = jwt.verify(token, JWT_SCERET);
-
-            const userId = (decodeToken.userID);
+            const userId = request.userId;
 
             // get user details from DB
             const user = await UserDB.findById(userId).select('-password -__v');
 
-            console.log(user);
-
             if (!user) {
                 response.status(404).json({ "message": "User not found" })
             }
-
 
             // response send to front end
             response.status(200).json({

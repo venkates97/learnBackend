@@ -1,28 +1,13 @@
 const TodoDB = require("../models/todos");
-const { JWT_SCERET } = require("../utils/config");
-const jsonWebToken = require("jsonwebtoken");
-const UserDB = require("../models/user")
-
 const todosControllers = {
 
     getAllTodos: async (request, response) => {
 
         try {
 
-            const token = request.cookies.token;
 
-            if (!token) {
-                return response.status(400).json({ message: "user need to login. (user Logged Out)" })
-            }
-            const userIdDetails = jsonWebToken.verify(token, JWT_SCERET)
 
-            const userDetails = await UserDB.find(userIdDetails.userId)
-
-            if (!userDetails) {
-                return response.status(400).json({ message: "Unable to febtch user details from ID" })
-
-            }
-
+        
             // console.log("Test: ", userDetails);
 
 

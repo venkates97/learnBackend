@@ -1,9 +1,12 @@
 const express = require("express");
 const { getAllTodos, getTodoById, createTodo, updateTodo, deleteTodo } = require("../Controlles/todosControllers");
+const isAuthenticated = require("../middleware/auth");
 
 const todoRouter = express.Router();
 
+todoRouter.use(isAuthenticated);
 
+// Protected routes
 todoRouter.get("/", getAllTodos);
 todoRouter.get("/:id", getTodoById);
 todoRouter.post("/", createTodo);
