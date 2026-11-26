@@ -10,7 +10,7 @@ const logger = (request,response,next) => {
 
     const logData = "Reacived time"+" "+new Date().toISOString()    
     +"\n"+request.ip+"\n"+
-    request.method+ "\n"+request.cookies+"\n"+request.url+"\n-----------------------\n";
+    request.method+ "\n"+"\n"+request.url+"\n-----------------------\n";
 
 
     fs.appendFile(`./logs/request_logs_${date.getDate()}-${date.getMonth()}-${date.getFullYear()}.log`,logData, (err) =>{

@@ -1,7 +1,14 @@
 const { default: mongoose } = require("mongoose");
 
 
-const todoSchema = new mongoose.Schema({
+const todoSchema = new mongoose.Schema(
+
+
+    
+
+
+    // class schema created
+    {
     title: {
         type: String
     }
@@ -15,7 +22,9 @@ const todoSchema = new mongoose.Schema({
         type: Boolean,
         default:false
     }
-})
+}
+
+)
 
 
 module.exports = mongoose.model('TodoDB',todoSchema,'todos')
