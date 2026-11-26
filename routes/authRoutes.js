@@ -8,7 +8,7 @@ const authRoute = express.Router();
 //Match routes
 authRoute.post("/register", registerUser )
 authRoute.post("/login", loginUser )
-authRoute.get("/me",me)
+authRoute.post("/me",me)
 authRoute.post("/logout", logOutUser)
 
 
