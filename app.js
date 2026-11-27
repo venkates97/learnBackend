@@ -19,10 +19,10 @@ app.use(logger);
 // app.use(express.json())
 
 // adding router
-app.use("/todos", todoRouter);
+app.use("/api/v1/todos", todoRouter);
 
 // auth Router
-app.use("/auth", authRoute)
+app.use("/api/v1/auth", authRoute)
 
 //handling router notfound error
 
