@@ -1,15 +1,25 @@
+const { Timestamp } = require("mongodb");
 const { default: mongoose } = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
     },
-    email:{
-        type:String
+    email: {
+        type: String
     },
-    password:{
-        type:String
+    password: {
+        type: String
+    },
+    role:{
+        type:String,
+        enum:["user","admin"],
+        default: "user"
     }
-})
+    
 
-module.exports = mongoose.model("UserDB", userSchema,"user")
+},{
+        timestamps: true
+    })
+
+module.exports = mongoose.model("UserDB", userSchema, "user")

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SCERET } = require("../utils/config");
+const UserDB = require("../models/user")
 
 
 async function isAuthenticated(request, response, next) {
@@ -23,4 +24,37 @@ async function isAuthenticated(request, response, next) {
     }
 }
 
-module.exports = isAuthenticated;
+function allowedRoles(roles) {
+
+
+
+    return async (request, response, next) => {
+
+        const userId = request.userId
+
+        if (!userId) {
+            return response.status(500).json({ message: "user Id not found. please login again" })
+        }
+
+        const user = await UserDB.findById(userId);
+
+        if (!user) {
+            return response.status(500).json({ message: "user is not found from the DB. please login again" })
+        }
+
+        if (!(roles.includes(user.role))){
+            return response.status(500).json({ message: "User not have access for this opeartion" })
+
+        }
+
+
+        console.log("roles:", roles.includes(user.role));
+
+        next();
+    }
+}
+
+module.exports = {
+    isAuthenticated,
+    allowedRoles
+};
